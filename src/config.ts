@@ -54,12 +54,11 @@ export const site = {
     backgroundImage: publicAsset('bg-rose-kolam.png'),
   },
   scrollStory: {
-    brideApproach: publicAsset('bride-1left-cutout.webp'),
-    groomApproach: publicAsset('groom-1left-cutout.webp'),
-    brideStand: publicAsset('bride-2left-cutout.webp'),
-    groomStand: publicAsset('groom-2left-cutout.webp'),
-    garlandMoment: publicAsset('bride-groom-center-cutout.webp'),
-    finalMoment: publicAsset('bride-groom-center2-cutout.webp'),
+    brideApproach: publicAsset('bride-1left-cutout.png'),
+    groomApproach: publicAsset('groom-1left-cutout.png'),
+    garlandMoment: publicAsset('bride-groom-center-cutout.png'),
+    finalMoment: publicAsset('bride-groom-center2-cutout.png'),
+    celebrationSound: publicAsset('party-popper.wav'),
   },
   venue: {
     name: 'Sarasu Mahal',
