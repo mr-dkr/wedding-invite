@@ -71,14 +71,6 @@ export function HeroSection() {
         </motion.p>
 
         <div className="mt-5 md:mt-6">
-          <motion.p
-            className="font-cormorant text-[10px] uppercase tracking-[0.45em] text-amber-200/85 md:text-xs"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.45, delay: 0.35 }}
-          >
-            Bride
-          </motion.p>
           <motion.h1
             className="mt-1.5 font-display text-4xl font-semibold leading-tight tracking-tight drop-shadow-md sm:text-5xl md:text-6xl lg:text-7xl"
             initial={{ opacity: 0, y: 20 }}
@@ -99,14 +91,6 @@ export function HeroSection() {
         </motion.p>
 
         <div>
-          <motion.p
-            className="font-cormorant text-[10px] uppercase tracking-[0.45em] text-amber-200/85 md:text-xs"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.45, delay: 0.48 }}
-          >
-            Groom
-          </motion.p>
           <motion.h1
             className="mt-1.5 font-display text-4xl font-semibold leading-tight tracking-tight drop-shadow-md sm:text-5xl md:text-6xl lg:text-7xl"
             initial={{ opacity: 0, y: 20 }}
