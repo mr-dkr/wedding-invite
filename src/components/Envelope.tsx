@@ -65,6 +65,9 @@ export function Envelope({
                 src={site.couple.monogramLogo}
                 alt="Nivedha and Divakar"
                 className="mx-auto mt-6 h-24 w-auto object-contain md:h-36"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
               />
             </div>
           </div>
