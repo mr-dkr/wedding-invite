@@ -37,14 +37,6 @@ export const site = {
       containerScaleDuration: 1.3,
     },
   },
-  audio: {
-    kettiMelam: publicAsset(
-      'sita-kalyanam-lyric-video-solo-dulquer-salmaan-neha-sharma-bejoy-nambiar-t_g6UgPr3Y.mp3',
-    ),
-    startAtSeconds: 1.23,
-    volume: 0.14,
-    fadeInDuration: 2600,
-  },
   /** Full-bleed hero (temple) — file in /public */
   hero: {
     image: publicAsset('temple-background.png'),

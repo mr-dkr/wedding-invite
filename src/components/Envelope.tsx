@@ -25,14 +25,14 @@ export function Envelope({
           initial={{ opacity: 0, y: 28 }}
           animate={{
             opacity: 1,
-            y: opening ? -32 : 0,
+            y: opening ? -48 : 0,
             scale: opening ? a.containerScaleOnOpen : 1,
           }}
           exit={{
             opacity: 0,
-            y: -72,
+            y: '-110vh',
             transition: {
-              duration: a.fadeOutDuration,
+              duration: a.fadeOutDuration + 0.35,
               ease: [0.22, 1, 0.36, 1],
             },
           }}
