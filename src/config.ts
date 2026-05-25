@@ -38,7 +38,10 @@ export const site = {
     },
   },
   audio: {
-    kettiMelam: publicAsset('ketti-melam.wav'),
+    kettiMelam: publicAsset(
+      'Sita Kalyanam Lyric Video - Solo _ Dulquer Salmaan, Neha Sharma, Bejoy Nambiar _ Trend Music.mp3',
+    ),
+    startAtSeconds: 1.23,
     volume: 0.14,
     fadeInDuration: 2600,
   },

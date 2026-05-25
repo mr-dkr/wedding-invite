@@ -20,6 +20,7 @@ export default function App() {
     const audio = new Audio(site.audio.kettiMelam)
     audio.loop = true
     audio.volume = 0
+    audio.currentTime = site.audio.startAtSeconds
     audioRef.current = audio
 
     audio.play().catch(() => {
