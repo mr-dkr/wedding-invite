@@ -7,7 +7,7 @@ export const site = {
   couple: {
     bride: 'Nivedha',
     groom: 'Divakar',
-    monogramLogo: publicAsset('nd-logo-envelope.jpg'),
+    monogramLogo: publicAsset('nd-logo-envelope.png'),
   },
   wedding: {
     /** Countdown target — centre of muhurtham window */
@@ -26,7 +26,7 @@ export const site = {
   },
   envelope: {
     sealColor: '#c2410c',
-    sealLogo: publicAsset('logo-seal.jpg'),
+    sealLogo: publicAsset('logo-seal.png'),
     animations: {
       initialFadeInDuration: 1.1,
       sealClickToFadeOutDelay: 950,
