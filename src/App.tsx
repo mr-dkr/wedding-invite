@@ -11,25 +11,70 @@ export default function App() {
   const [opening, setOpening] = useState(false)
   const [showInvitation, setShowInvitation] = useState(false)
   const openedRef = useRef(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const audioFadeRef = useRef<number | null>(null)
+
+  const startKettiMelam = useCallback(() => {
+    if (audioRef.current) return
+
+    const audio = new Audio(site.audio.kettiMelam)
+    audio.loop = true
+    audio.volume = 0
+    audioRef.current = audio
+
+    audio.play().catch(() => {
+      audioRef.current = null
+    })
+  }, [])
+
+  const fadeInKettiMelam = useCallback(() => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    if (audioFadeRef.current) {
+      window.cancelAnimationFrame(audioFadeRef.current)
+    }
+
+    const startedAt = performance.now()
+    const targetVolume = site.audio.volume
+
+    const step = (now: number) => {
+      const progress = Math.min(
+        (now - startedAt) / site.audio.fadeInDuration,
+        1,
+      )
+      audio.volume = targetVolume * progress
+
+      if (progress < 1) {
+        audioFadeRef.current = window.requestAnimationFrame(step)
+        return
+      }
+
+      audioFadeRef.current = null
+    }
+
+    audioFadeRef.current = window.requestAnimationFrame(step)
+  }, [])
 
   const handleSealClick = useCallback(() => {
     if (openedRef.current) return
     openedRef.current = true
     setOpening(true)
-    const paperRevealDelayMs = envAnim.paperRevealDelay * 1000
-    const paperRevealDurationMs = envAnim.paperRevealDuration * 1000
-    const invitationRevealDelay =
-      paperRevealDelayMs + paperRevealDurationMs * 0.68
-    const envelopeExitDelay = paperRevealDelayMs + paperRevealDurationMs + 120
+    startKettiMelam()
+    const transitionStartDelay =
+      envAnim.sealClickToFadeOutDelay +
+      envAnim.flapOpeningDuration * 1000 -
+      envAnim.fadeOutDuration * 450
 
     window.setTimeout(() => {
       setShowInvitation(true)
-    }, invitationRevealDelay)
+      fadeInKettiMelam()
+    }, Math.max(0, transitionStartDelay - 150))
     window.setTimeout(() => {
       setShowEnvelope(false)
       setOpening(false)
-    }, envelopeExitDelay)
-  }, [])
+    }, transitionStartDelay)
+  }, [fadeInKettiMelam, startKettiMelam])
 
   const handleEnvelopeExitComplete = useCallback(() => {
     openedRef.current = false

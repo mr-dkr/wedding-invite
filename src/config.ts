@@ -32,12 +32,15 @@ export const site = {
       sealClickToFadeOutDelay: 950,
       flapOpeningDuration: 1.35,
       fadeOutDuration: 1.15,
-      paperRevealDelay: 0.45,
-      paperRevealDuration: 2.55,
       hoverLiftDistance: 8,
       containerScaleOnOpen: 1.015,
       containerScaleDuration: 1.3,
     },
+  },
+  audio: {
+    kettiMelam: publicAsset('ketti-melam.wav'),
+    volume: 0.14,
+    fadeInDuration: 2600,
   },
   /** Full-bleed hero (temple) — file in /public */
   hero: {
