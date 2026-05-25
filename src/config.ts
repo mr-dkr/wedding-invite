@@ -53,6 +53,14 @@ export const site = {
   invitation: {
     backgroundImage: publicAsset('bg-rose-kolam.png'),
   },
+  scrollStory: {
+    brideApproach: publicAsset('bride-1left-cutout.webp'),
+    groomApproach: publicAsset('groom-1left-cutout.webp'),
+    brideStand: publicAsset('bride-2left-cutout.webp'),
+    groomStand: publicAsset('groom-2left-cutout.webp'),
+    garlandMoment: publicAsset('bride-groom-center-cutout.webp'),
+    finalMoment: publicAsset('bride-groom-center2-cutout.webp'),
+  },
   venue: {
     name: 'Sarasu Mahal',
     addressLine: 'Avalpoondurai',

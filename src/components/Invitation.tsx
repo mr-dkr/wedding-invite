@@ -9,6 +9,7 @@ import {
   KolamDivider,
 } from './KolamBorder'
 import { ScrollReveal } from './ScrollReveal'
+import { ScrollCharacterStory } from './ScrollCharacterStory'
 import { SectionReveal } from './SectionReveal'
 import { VenueMap } from './VenueMap'
 
@@ -59,6 +60,7 @@ export function Invitation() {
         }}
       />
       <KolamAmbient />
+      <ScrollCharacterStory />
 
       <div className="relative z-[1]">
         <HeroSection />
