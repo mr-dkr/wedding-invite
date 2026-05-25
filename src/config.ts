@@ -7,7 +7,7 @@ export const site = {
   couple: {
     bride: 'Nivedha',
     groom: 'Divakar',
-    monogramLogo: publicAsset('logo.png'),
+    monogramLogo: publicAsset('nd-logo.png'),
   },
   wedding: {
     /** Countdown target — centre of muhurtham window */
@@ -28,13 +28,13 @@ export const site = {
     sealColor: '#c2410c',
     sealLogo: publicAsset('logo.png'),
     animations: {
-      initialFadeInDuration: 0.8,
-      sealClickToFadeOutDelay: 180,
-      flapOpeningDuration: 0.65,
-      fadeOutDuration: 0.6,
+      initialFadeInDuration: 1.1,
+      sealClickToFadeOutDelay: 950,
+      flapOpeningDuration: 1.35,
+      fadeOutDuration: 1.15,
       hoverLiftDistance: 8,
-      containerScaleOnOpen: 1.02,
-      containerScaleDuration: 0.7,
+      containerScaleOnOpen: 1.015,
+      containerScaleDuration: 1.3,
     },
   },
   /** Full-bleed hero (temple) — file in /public */

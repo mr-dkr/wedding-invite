@@ -16,17 +16,18 @@ export default function App() {
     if (openedRef.current) return
     openedRef.current = true
     setOpening(true)
+    const transitionStartDelay =
+      envAnim.sealClickToFadeOutDelay +
+      envAnim.flapOpeningDuration * 1000 -
+      envAnim.fadeOutDuration * 450
+
     window.setTimeout(() => {
       setShowInvitation(true)
-    }, envAnim.sealClickToFadeOutDelay)
+    }, Math.max(0, transitionStartDelay - 150))
     window.setTimeout(() => {
       setShowEnvelope(false)
       setOpening(false)
-    },
-      envAnim.sealClickToFadeOutDelay +
-        envAnim.flapOpeningDuration * 1000 +
-        400,
-    )
+    }, transitionStartDelay)
   }, [])
 
   const handleEnvelopeExitComplete = useCallback(() => {
@@ -45,9 +46,12 @@ export default function App() {
         {showInvitation && (
           <motion.div
             key="invitation"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 56, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              duration: 1.35,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           >
             <Invitation />
           </motion.div>

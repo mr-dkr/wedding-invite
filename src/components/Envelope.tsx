@@ -22,20 +22,29 @@ export function Envelope({
       {open && (
         <motion.div
           className="pointer-events-auto fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-cream-100 via-cream-200 to-cream-100 px-6"
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={{
             opacity: 1,
+            y: opening ? -32 : 0,
             scale: opening ? a.containerScaleOnOpen : 1,
           }}
           exit={{
             opacity: 0,
-            transition: { duration: a.fadeOutDuration, ease: 'easeInOut' },
+            y: -72,
+            transition: {
+              duration: a.fadeOutDuration,
+              ease: [0.22, 1, 0.36, 1],
+            },
           }}
           transition={{
             opacity: { duration: a.initialFadeInDuration, ease: 'easeOut' },
+            y: {
+              duration: a.containerScaleDuration,
+              ease: [0.22, 1, 0.36, 1],
+            },
             scale: {
               duration: a.containerScaleDuration,
-              ease: [0.4, 0, 0.2, 1],
+              ease: [0.22, 1, 0.36, 1],
             },
           }}
         >
@@ -74,8 +83,11 @@ export function Envelope({
               <motion.div
                 className="absolute inset-x-6 bottom-4 top-[28%] rounded-lg border border-gold-300/40 bg-white/90 shadow-inner"
                 initial={{ y: 8, opacity: 0.85 }}
-                animate={{ y: opening ? 0 : 8, opacity: opening ? 1 : 0.85 }}
-                transition={{ duration: 0.4 }}
+                animate={{ y: opening ? -18 : 8, opacity: opening ? 1 : 0.85 }}
+                transition={{
+                  duration: a.flapOpeningDuration,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
               />
 
               {/* Top flap */}
@@ -85,7 +97,7 @@ export function Envelope({
                 animate={{ rotateX: opening ? -178 : 0 }}
                 transition={{
                   duration: a.flapOpeningDuration,
-                  ease: [0.4, 0, 0.2, 1],
+                  ease: [0.22, 1, 0.36, 1],
                 }}
               />
 
@@ -104,7 +116,7 @@ export function Envelope({
                   scale: opening ? 0.85 : 1,
                   opacity: opening ? 0 : 1,
                 }}
-                transition={{ duration: 0.35 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 onClick={onSealClick}
               >
                 <img
