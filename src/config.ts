@@ -37,6 +37,13 @@ export const site = {
       containerScaleDuration: 1.3,
     },
   },
+  audio: {
+    backgroundMusic: publicAsset(
+      'mangalyam-tantunanena-lyrical-just-married-sanjith-hegde-c-r-bobby-b-aj_DHDXVlxD.mp3',
+    ),
+    volume: 0.16,
+    fadeInDuration: 2600,
+  },
   /** Full-bleed hero (temple) — file in /public */
   hero: {
     image: publicAsset('temple-background.png'),

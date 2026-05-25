@@ -11,11 +11,56 @@ export default function App() {
   const [opening, setOpening] = useState(false)
   const [showInvitation, setShowInvitation] = useState(false)
   const openedRef = useRef(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const audioFadeRef = useRef<number | null>(null)
+
+  const startBackgroundMusic = useCallback(() => {
+    if (audioRef.current) return
+
+    const audio = new Audio(site.audio.backgroundMusic)
+    audio.loop = true
+    audio.volume = 0
+    audioRef.current = audio
+
+    audio.play().catch(() => {
+      audioRef.current = null
+    })
+  }, [])
+
+  const fadeInBackgroundMusic = useCallback(() => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    if (audioFadeRef.current) {
+      window.cancelAnimationFrame(audioFadeRef.current)
+    }
+
+    const startedAt = performance.now()
+    const targetVolume = site.audio.volume
+
+    const step = (now: number) => {
+      const progress = Math.min(
+        (now - startedAt) / site.audio.fadeInDuration,
+        1,
+      )
+      audio.volume = targetVolume * progress
+
+      if (progress < 1) {
+        audioFadeRef.current = window.requestAnimationFrame(step)
+        return
+      }
+
+      audioFadeRef.current = null
+    }
+
+    audioFadeRef.current = window.requestAnimationFrame(step)
+  }, [])
 
   const handleSealClick = useCallback(() => {
     if (openedRef.current) return
     openedRef.current = true
     setOpening(true)
+    startBackgroundMusic()
     const transitionStartDelay =
       envAnim.sealClickToFadeOutDelay +
       envAnim.flapOpeningDuration * 1000 -
@@ -23,12 +68,13 @@ export default function App() {
 
     window.setTimeout(() => {
       setShowInvitation(true)
+      fadeInBackgroundMusic()
     }, Math.max(0, transitionStartDelay - 350))
     window.setTimeout(() => {
       setShowEnvelope(false)
       setOpening(false)
     }, transitionStartDelay)
-  }, [])
+  }, [fadeInBackgroundMusic, startBackgroundMusic])
 
   const handleEnvelopeExitComplete = useCallback(() => {
     openedRef.current = false
