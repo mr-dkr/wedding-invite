@@ -131,6 +131,56 @@ export function Envelope({
           <p className="mt-10 font-sans text-sm text-stone-600/90">
             Click the seal
           </p>
+
+          <AnimatePresence>
+            {opening && (
+              <motion.div
+                className="pointer-events-none absolute inset-0 z-40 flex items-center justify-center overflow-hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <motion.div
+                  className="relative flex h-[100dvh] w-screen items-center justify-center overflow-hidden bg-gradient-to-br from-white via-cream-50 to-gold-50 shadow-2xl"
+                  initial={{
+                    borderRadius: 28,
+                    opacity: 0,
+                    scale: 0.16,
+                    y: 170,
+                  }}
+                  animate={{
+                    borderRadius: [28, 24, 0, 0],
+                    opacity: [0, 1, 1, 0],
+                    scale: [0.16, 0.36, 1.08, 1.08],
+                    y: [170, 72, 0, 0],
+                  }}
+                  transition={{
+                    delay: a.paperRevealDelay,
+                    duration: a.paperRevealDuration,
+                    ease: [0.22, 1, 0.36, 1],
+                    times: [0, 0.28, 0.68, 1],
+                  }}
+                >
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(251,191,36,0.18),transparent_42%)]" />
+                  <div className="absolute inset-x-10 top-10 h-px bg-gold-300/40" />
+                  <div className="absolute inset-x-10 bottom-10 h-px bg-gold-300/40" />
+                  <motion.p
+                    className="relative z-[1] font-cormorant text-sm uppercase tracking-[0.55em] text-gold-700/70 md:text-base"
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: [0, 1, 1, 0], y: [14, 0, 0, -12] }}
+                    transition={{
+                      delay: a.paperRevealDelay + 0.35,
+                      duration: a.paperRevealDuration - 0.35,
+                      ease: [0.22, 1, 0.36, 1],
+                      times: [0, 0.25, 0.7, 1],
+                    }}
+                  >
+                    Opening invitation
+                  </motion.p>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>

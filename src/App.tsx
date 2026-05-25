@@ -16,18 +16,19 @@ export default function App() {
     if (openedRef.current) return
     openedRef.current = true
     setOpening(true)
-    const transitionStartDelay =
-      envAnim.sealClickToFadeOutDelay +
-      envAnim.flapOpeningDuration * 1000 -
-      envAnim.fadeOutDuration * 450
+    const paperRevealDelayMs = envAnim.paperRevealDelay * 1000
+    const paperRevealDurationMs = envAnim.paperRevealDuration * 1000
+    const invitationRevealDelay =
+      paperRevealDelayMs + paperRevealDurationMs * 0.68
+    const envelopeExitDelay = paperRevealDelayMs + paperRevealDurationMs + 120
 
     window.setTimeout(() => {
       setShowInvitation(true)
-    }, Math.max(0, transitionStartDelay - 150))
+    }, invitationRevealDelay)
     window.setTimeout(() => {
       setShowEnvelope(false)
       setOpening(false)
-    }, transitionStartDelay)
+    }, envelopeExitDelay)
   }, [])
 
   const handleEnvelopeExitComplete = useCallback(() => {
