@@ -7,7 +7,6 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-snap-type: y proximity;
   }
 
   body {

@@ -7,16 +7,13 @@ type SectionRevealProps = {
   id?: string
 }
 
-/**
- * Full-bleed section scroll animation + snap alignment for section-wise scrolling.
- */
 export function SectionReveal({ children, className = '', id }: SectionRevealProps) {
   const reduce = useReducedMotion()
 
   return (
     <motion.section
       id={id}
-      className={`snap-start snap-always ${className}`.trim()}
+      className={className}
       initial={reduce ? 'visible' : 'hidden'}
       whileInView="visible"
       viewport={{ once: true, margin: '-40px 0px', amount: 0.08 }}

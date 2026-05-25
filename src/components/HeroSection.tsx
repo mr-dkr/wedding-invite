@@ -18,7 +18,7 @@ export function HeroSection() {
   return (
     <header
       ref={sectionRef}
-      className="relative flex min-h-[100dvh] h-[100dvh] max-h-[100dvh] snap-start snap-always flex-col overflow-hidden"
+      className="relative flex h-[100dvh] min-h-[100dvh] max-h-[100dvh] flex-col overflow-hidden"
     >
       {/* Full-bleed cover */}
       <motion.div
