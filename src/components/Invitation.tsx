@@ -15,16 +15,37 @@ import { VenueMap } from './VenueMap'
 export function Invitation() {
   const [rsvpName, setRsvpName] = useState('')
   const [rsvpPhone, setRsvpPhone] = useState('')
+  const [rsvpStatus, setRsvpStatus] = useState<
+    'idle' | 'submitting' | 'sent' | 'error'
+  >('idle')
 
-  const handleRsvpSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleRsvpSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const subject = encodeURIComponent('Wedding RSVP')
-    const body = encodeURIComponent(
-      `Hi Divakar,\n\nI would like to RSVP for the wedding.\n\nName: ${rsvpName}\nPhone: ${rsvpPhone}\n\nThank you.`,
-    )
+    if (!site.rsvp.sheetSubmitUrl) {
+      setRsvpStatus('error')
+      return
+    }
 
-    window.location.href = `mailto:${site.rsvp.email}?subject=${subject}&body=${body}`
+    setRsvpStatus('submitting')
+
+    try {
+      const formData = new FormData()
+      formData.append('name', rsvpName.trim())
+      formData.append('phone', rsvpPhone.trim())
+
+      await fetch(site.rsvp.sheetSubmitUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData,
+      })
+
+      setRsvpName('')
+      setRsvpPhone('')
+      setRsvpStatus('sent')
+    } catch {
+      setRsvpStatus('error')
+    }
   }
 
   return (
@@ -252,13 +273,24 @@ export function Invitation() {
                   </label>
                   <motion.button
                     type="submit"
+                    disabled={rsvpStatus === 'submitting'}
                     className="mt-2 inline-flex w-full items-center justify-center rounded-full border-2 border-gold-400 bg-gold-50 px-7 py-3 text-sm font-semibold uppercase tracking-wider text-gold-800 transition hover:bg-gold-100 hover:shadow-lg"
                     whileHover={{ scale: 1.03, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    Send RSVP
+                    {rsvpStatus === 'submitting' ? 'Sending...' : 'Send RSVP'}
                   </motion.button>
                 </form>
+                {rsvpStatus === 'sent' && (
+                  <p className="mt-4 text-sm font-medium text-emerald-700">
+                    RSVP sent. Thank you!
+                  </p>
+                )}
+                {rsvpStatus === 'error' && (
+                  <p className="mt-4 text-sm font-medium text-red-700">
+                    RSVP sheet is not connected yet. Please use WhatsApp for now.
+                  </p>
+                )}
                 <motion.a
                   href={site.rsvp.whatsappLink}
                   target="_blank"
@@ -270,7 +302,7 @@ export function Invitation() {
                   WhatsApp me
                 </motion.a>
                 <p className="mt-6 text-sm text-stone-500">
-                  RSVP details will be sent to {site.rsvp.email} · WhatsApp{' '}
+                  RSVP details will be saved to our wedding sheet · WhatsApp{' '}
                   {site.rsvp.phoneDisplay}
                 </p>
               </div>

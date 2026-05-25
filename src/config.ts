@@ -134,7 +134,10 @@ export const site = {
     heading: 'RSVP',
     message:
       'Share your details and send your RSVP to us.',
-    email: 'divakarthambidurai@gmail.com',
+    sheetSubmitUrl:
+      'https://script.google.com/macros/s/AKfycbwWupcaMAKNImDOj50hss7DoletIX1gJ9Qa89Wc_ujIcfZPgtD79xRQ6arN_ybGwcX4pA/exec',
+    sheetUrl:
+      'https://docs.google.com/spreadsheets/d/1yGenXp3kIhv7U3bCkrqOc4EO-H2zXIlg0aMdqSbJd38/edit?usp=sharing',
     phoneDisplay: '8973983311',
     whatsappLink:
       'https://wa.me/918973983311?text=Hi%20Divakar%2C%20I%20would%20like%20to%20RSVP%20for%20the%20wedding.',
