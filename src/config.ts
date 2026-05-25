@@ -1,10 +1,13 @@
 /** Wedding invitation content */
 
+const publicAsset = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
+
 export const site = {
   couple: {
     bride: 'Nivedha',
     groom: 'Divakar',
-    monogramLogo: '/nd-logo.png',
+    monogramLogo: publicAsset('logo.png'),
   },
   wedding: {
     /** Countdown target — centre of muhurtham window */
@@ -23,7 +26,7 @@ export const site = {
   },
   envelope: {
     sealColor: '#c2410c',
-    sealLogo: '/logo.png',
+    sealLogo: publicAsset('logo.png'),
     animations: {
       initialFadeInDuration: 0.8,
       sealClickToFadeOutDelay: 180,
@@ -36,19 +39,19 @@ export const site = {
   },
   /** Full-bleed hero (temple) — file in /public */
   hero: {
-    image: '/temple-background.png',
+    image: publicAsset('temple-background.png'),
     tagline: "We're getting married",
   },
   /** Subtle full-page texture behind invitation content — kolam / pattern PNG in /public */
   invitation: {
-    backgroundImage: '/bg-rose-kolam.png',
+    backgroundImage: publicAsset('bg-rose-kolam.png'),
   },
   venue: {
     name: 'Sarasu Mahal',
     addressLine: 'Avalpoondurai',
     city: 'Erode',
     region: 'Tamil Nadu',
-    image: '/wedding-hall.png',
+    image: publicAsset('wedding-hall.png'),
     mapsLink:
       'https://www.google.com/maps/search/?api=1&query=Sarasu+Mahal+Avalpoondurai+Erode',
     /** Google Maps embed (no API key) */
@@ -63,8 +66,7 @@ export const site = {
       title: 'Reception',
       description:
         'An evening of warmth, music, and togetherness as we begin the celebrations with everyone we love.',
-      image:
-        'reception.png',
+      image: publicAsset('reception.png'),
       imagePositionClass: 'object-center',
     },
     {
@@ -72,8 +74,7 @@ export const site = {
       title: 'Traditions',
       description:
         'Sacred rituals and blessings woven into every moment of our Tamil wedding.',
-      image:
-        'traditions.png',
+      image: publicAsset('traditions.png'),
       imagePositionClass: 'object-center',
     },
     {
@@ -81,7 +82,7 @@ export const site = {
       title: 'New beginnings',
       description:
         'Two families, one journey — we can’t wait to share this joy with you.',
-      image: '/beginnings.png',
+      image: publicAsset('beginnings.png'),
       imagePositionClass: 'object-top',
     },
   ],
@@ -91,7 +92,7 @@ export const site = {
       time: '24 Jun · 5:00 – 6:00 PM',
       title: 'Mappilai Alaipu',
       description: 'Welcoming the groom and his family',
-      image: '/mappilai-azhaipu.png',
+      image: publicAsset('mappilai-azhaipu.png'),
     },
     {
       id: 2,
@@ -99,14 +100,14 @@ export const site = {
       title: 'Reception',
       description: '6:00 PM onwards — dinner & celebrations',
       /** Diya — lamps & auspicious light for the evening celebration */
-      image: '/reception-logo.png',
+      image: publicAsset('reception-logo.png'),
     },
     {
       id: 3,
       time: '25 Jun · 6:00 – 7:00 AM',
       title: 'Kasi Yatrai',
       description: 'A joyful traditional wedding ritual',
-      image: '/kasi-yatra.png',
+      image: publicAsset('kasi-yatra.png'),
     },
     {
       id: 4,
@@ -114,7 +115,7 @@ export const site = {
       title: 'Muhurtham',
       description: 'Auspicious wedding ceremony',
       /** Om — sacred symbol for the wedding ceremony (replaces generic chapel) */
-      image: 'muhurtham.png',
+      image: publicAsset('muhurtham.png'),
     },
   ],
   translations: {
