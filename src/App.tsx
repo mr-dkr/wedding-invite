@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Envelope } from './components/Envelope'
 import { Invitation } from './components/Invitation'
@@ -55,6 +55,58 @@ export default function App() {
 
     audioFadeRef.current = window.requestAnimationFrame(step)
   }, [])
+
+  const pauseBackgroundMusic = useCallback(() => {
+    const audio = audioRef.current
+    if (!audio || audio.paused) return
+
+    if (audioFadeRef.current) {
+      window.cancelAnimationFrame(audioFadeRef.current)
+    }
+
+    const startedAt = performance.now()
+    const initialVolume = audio.volume
+    const fadeOutDuration = 900
+
+    const step = (now: number) => {
+      const progress = Math.min((now - startedAt) / fadeOutDuration, 1)
+      audio.volume = initialVolume * (1 - progress)
+
+      if (progress < 1) {
+        audioFadeRef.current = window.requestAnimationFrame(step)
+        return
+      }
+
+      audio.pause()
+      audio.volume = 0
+      audioFadeRef.current = null
+    }
+
+    audioFadeRef.current = window.requestAnimationFrame(step)
+  }, [])
+
+  useEffect(() => {
+    if (!showInvitation) return
+
+    const pauseAtPageEnd = () => {
+      const { documentElement } = document
+      const distanceToBottom =
+        documentElement.scrollHeight - window.innerHeight - window.scrollY
+
+      if (distanceToBottom <= 32) {
+        pauseBackgroundMusic()
+      }
+    }
+
+    pauseAtPageEnd()
+    window.addEventListener('scroll', pauseAtPageEnd, { passive: true })
+    window.addEventListener('resize', pauseAtPageEnd)
+
+    return () => {
+      window.removeEventListener('scroll', pauseAtPageEnd)
+      window.removeEventListener('resize', pauseAtPageEnd)
+    }
+  }, [pauseBackgroundMusic, showInvitation])
 
   const handleSealClick = useCallback(() => {
     if (openedRef.current) return
