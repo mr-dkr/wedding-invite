@@ -119,11 +119,20 @@ export function ScrollCharacterStory() {
   const { scrollYProgress } = useScroll()
   const s = site.scrollStory
   const [celebrating, setCelebrating] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const hasCelebratedRef = useRef(false)
   const celebrationTimerRef = useRef<number | null>(null)
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 640px)')
+    const handleMediaChange = () => setIsMobile(mediaQuery.matches)
+
+    handleMediaChange()
+    mediaQuery.addEventListener('change', handleMediaChange)
+
     return () => {
+      mediaQuery.removeEventListener('change', handleMediaChange)
+
       if (celebrationTimerRef.current) {
         window.clearTimeout(celebrationTimerRef.current)
       }
@@ -165,12 +174,12 @@ export function ScrollCharacterStory() {
   const brideApproachX = useTransform(
     scrollYProgress,
     [0.04, 0.3, 0.5],
-    ['-34vw', '-20vw', '-15vw'],
+    isMobile ? ['-58vw', '-40vw', '-36vw'] : ['-42vw', '-24vw', '-16vw'],
   )
   const groomApproachX = useTransform(
     scrollYProgress,
     [0.04, 0.3, 0.5],
-    ['34vw', '20vw', '15vw'],
+    isMobile ? ['12vw', '6vw', '-10vw'] : ['20vw', '10vw', '8vw'],
   )
   const approachY = useTransform(scrollYProgress, [0.04, 0.5], ['4vh', '4vh'])
   const approachScale = useTransform(scrollYProgress, [0.04, 0.5], [0.82, 0.9])
@@ -181,7 +190,11 @@ export function ScrollCharacterStory() {
     [0.505, 0.51, 0.75, 0.755],
     [0, 1, 1, 0],
   )
-  const garlandX = useTransform(scrollYProgress, [0.505, 0.75], ['0vw', '0vw'])
+  const garlandX = useTransform(
+    scrollYProgress,
+    [0.505, 0.75],
+    isMobile ? ['-22vw', '-22vw'] : ['-12vw', '-12vw'],
+  )
   const garlandY = useTransform(scrollYProgress, [0.505, 0.75], ['8vh', '8vh'])
   const garlandScale = useTransform(scrollYProgress, [0.505, 0.75], [0.82, 0.86])
 
@@ -190,7 +203,11 @@ export function ScrollCharacterStory() {
     [0.755, 0.76, 1],
     [0, 1, 1],
   )
-  const finalX = useTransform(scrollYProgress, [0.755, 1], ['0vw', '0vw'])
+  const finalX = useTransform(
+    scrollYProgress,
+    [0.755, 1],
+    isMobile ? ['-22vw', '-22vw'] : ['-12vw', '-12vw'],
+  )
   const finalY = useTransform(scrollYProgress, [0.755, 1], ['8vh', '8vh'])
   const finalScale = useTransform(scrollYProgress, [0.755, 1], [0.84, 0.9])
   const backdropOpacity = useTransform(

@@ -13,6 +13,68 @@ import { ScrollCharacterStory } from './ScrollCharacterStory'
 import { SectionReveal } from './SectionReveal'
 import { VenueMap } from './VenueMap'
 
+const calendarLocation = `${site.venue.name}, ${site.venue.addressLine}, ${site.venue.city}, ${site.venue.region}`
+
+function googleCalendarLink(event: (typeof site.calendarEvents)[number]) {
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: event.title,
+    dates: `${event.startUtc}/${event.endUtc}`,
+    details: event.description,
+    location: calendarLocation,
+  })
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`
+}
+
+function appleCalendarLink(event: (typeof site.calendarEvents)[number]) {
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Nivedha Divakar Wedding//Invitation//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    `UID:${event.id}@nivedha-divakar-wedding`,
+    `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}`,
+    `DTSTART:${event.startUtc}`,
+    `DTEND:${event.endUtc}`,
+    `SUMMARY:${event.title}`,
+    `DESCRIPTION:${event.description}`,
+    `LOCATION:${calendarLocation}`,
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n')
+
+  return `data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}`
+}
+
+function addCalendarLink(event: (typeof site.calendarEvents)[number]) {
+  const isAppleDevice =
+    /iPad|iPhone|iPod|Macintosh/.test(window.navigator.userAgent) ||
+    window.navigator.platform.toLowerCase().includes('mac')
+
+  if (isAppleDevice) {
+    const link = document.createElement('a')
+    link.href = appleCalendarLink(event)
+    link.download = event.filename
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+    return
+  }
+
+  window.open(googleCalendarLink(event), '_blank', 'noopener,noreferrer')
+}
+
+function addWeddingCalendar() {
+  const [firstEvent] = site.calendarEvents
+
+  if (firstEvent) {
+    addCalendarLink(firstEvent)
+  }
+}
+
 export function Invitation() {
   const [rsvpName, setRsvpName] = useState('')
   const [rsvpPhone, setRsvpPhone] = useState('')
@@ -303,6 +365,15 @@ export function Invitation() {
                 >
                   WhatsApp me
                 </motion.a>
+                <motion.button
+                  type="button"
+                  onClick={addWeddingCalendar}
+                  className="mx-auto mt-4 inline-flex w-full max-w-xl items-center justify-center rounded-full border-2 border-gold-400 bg-gold-50 px-7 py-3 text-sm font-semibold uppercase tracking-wider text-gold-800 transition hover:bg-gold-100 hover:shadow-lg"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Add to your calendar
+                </motion.button>
                 <p className="mt-6 text-sm text-stone-500">
                   RSVP details will be saved to our wedding sheet · WhatsApp{' '}
                   {site.rsvp.phoneDisplay}

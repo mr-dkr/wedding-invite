@@ -115,6 +115,7 @@ export const site = {
       description: '6:00 PM onwards — dinner & celebrations',
       /** Diya — lamps & auspicious light for the evening celebration */
       image: publicAsset('reception-logo.png'),
+      calendarEventId: 'reception',
     },
     {
       id: 3,
@@ -130,6 +131,27 @@ export const site = {
       description: 'Auspicious wedding ceremony',
       /** Om — sacred symbol for the wedding ceremony (replaces generic chapel) */
       image: publicAsset('muhurtham.png'),
+      calendarEventId: 'muhurtham',
+    },
+  ],
+  calendarEvents: [
+    {
+      id: 'reception',
+      title: 'Nivedha & Divakar Reception',
+      startUtc: '20260624T123000Z',
+      endUtc: '20260624T173000Z',
+      description:
+        'Reception celebration for Nivedha and Divakar. Dinner and celebrations from 6:00 PM onwards.',
+      filename: 'nivedha-divakar-reception.ics',
+    },
+    {
+      id: 'muhurtham',
+      title: 'Nivedha & Divakar Muhurtham',
+      startUtc: '20260625T023000Z',
+      endUtc: '20260625T033000Z',
+      description:
+        'Auspicious wedding ceremony for Nivedha and Divakar.',
+      filename: 'nivedha-divakar-muhurtham.ics',
     },
   ],
   translations: {
