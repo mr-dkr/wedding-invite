@@ -66,11 +66,15 @@ export const site = {
     city: 'Erode',
     region: 'Tamil Nadu',
     image: publicAsset('wedding-hall.png'),
+    coordinates: {
+      latitude: 11.23435,
+      longitude: 77.72115,
+    },
     mapsLink:
-      'https://www.google.com/maps/search/?api=1&query=Sarasu+Mahal+Avalpoondurai+Erode',
+      'https://www.google.com/maps/search/?api=1&query=11.23435,77.72115',
     /** Google Maps embed (no API key) */
     mapsEmbedUrl:
-      'https://maps.google.com/maps?q=Sarasu+Mahal+Avalpoondurai+Erode&hl=en&z=15&output=embed',
+      'https://maps.google.com/maps?q=11.23435,77.72115&hl=en&z=17&output=embed',
     description:
       'Join us at Sarasu Mahal in Avalpoondurai, Erode — a gracious setting for our reception and wedding celebrations with family and friends.',
   },
