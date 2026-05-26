@@ -179,7 +179,7 @@ export function ScrollCharacterStory() {
   const groomApproachX = useTransform(
     scrollYProgress,
     [0.04, 0.3, 0.5],
-    isMobile ? ['40vw', '6vw', '-10vw'] : ['20vw', '10vw', '8vw'],
+    isMobile ? ['56vw', '6vw', '-10vw'] : ['20vw', '10vw', '8vw'],
   )
   const approachY = useTransform(scrollYProgress, [0.04, 0.5], ['4vh', '4vh'])
   const approachScale = useTransform(scrollYProgress, [0.04, 0.5], [0.82, 0.9])
