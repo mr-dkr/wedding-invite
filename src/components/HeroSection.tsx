@@ -35,25 +35,12 @@ export function HeroSection() {
       </motion.div>
 
       <div
-        className="absolute inset-0 z-[1] bg-gradient-to-b from-stone-950/75 via-stone-900/40 to-stone-950/88"
+        className="absolute inset-0 z-[1] bg-gradient-to-b from-stone-950/60 via-stone-900/30 to-stone-950/72"
         aria-hidden
       />
       <div
-        className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_25%,transparent_0%,rgba(15,10,8,0.35)_70%)]"
+        className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_25%,transparent_0%,rgba(15,10,8,0.24)_70%)]"
         aria-hidden
-      />
-
-      <motion.div
-        className="pointer-events-none absolute inset-y-0 left-0 z-[2] w-[min(18vw,7rem)] bg-gradient-to-r from-amber-950/55 via-amber-900/20 to-transparent"
-        initial={{ x: '-100%', opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-      />
-      <motion.div
-        className="pointer-events-none absolute inset-y-0 right-0 z-[2] w-[min(18vw,7rem)] bg-gradient-to-l from-amber-950/55 via-amber-900/20 to-transparent"
-        initial={{ x: '100%', opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
       />
 
       {/* Top center: names + details (details sit a bit higher, close under names) */}
